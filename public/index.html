@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Aplicación</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        form label {
+            margin-bottom: 8px;
+        }
+
+        form input {
+            padding: 8px;
+            margin-bottom: 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mi Aplicación</h1>
+    </header>
+
+    <main>
+        <!-- Botón para obtener todos los clientes -->
+        <button onclick="obtenerClientes()">Obtener Todos los Clientes</button>
+
+        <!-- Formulario para agregar un nuevo cliente -->
+        <form onsubmit="agregarCliente(event)">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+            <label for="edad">Edad:</label>
+            <input type="number" id="edad" name="edad" required>
+            <label for="profesion">Profesión:</label>
+            <input type="text" id="profesion" name="profesion" required>
+            <button type="submit">Agregar Cliente</button>
+        </form>
+
+        <!-- Tabla para mostrar los clientes -->
+        <table id="clientesTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Edad</th>
+                    <th>Profesión</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="clientesBody"></tbody>
+        </table>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>
