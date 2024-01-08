@@ -127,3 +127,62 @@ async function eliminarCliente(id) {
         console.error('Error al eliminar cliente:', error);
     }
 }
+
+async function agregarCliente(event) {
+    event.preventDefault();
+
+    const nombreInput = document.getElementById('nombre');
+    const edadInput = document.getElementById('edad');
+    const profesionInput = document.getElementById('profesion');
+
+    const nombre = nombreInput.value;
+    const edad = edadInput.value;
+    const profesion = profesionInput.value;
+
+    // Validación de datos
+    if (!nombre || !edad || !profesion) {
+        alert('Todos los campos son obligatorios');
+        return;
+    }
+
+    if (!/^[a-zA-Z\s]+$/.test(nombre)) {
+        alert('El nombre solo debe contener letras y espacios');
+        return;
+    }
+
+    if (!/^\d{1,2}$/.test(edad) || edad <= 0) {
+        alert('La edad debe ser un número positivo de hasta dos cifras');
+        return;
+    }
+
+    if (!/^[a-zA-Z\s]+$/.test(profesion)) {
+        alert('La profesión solo debe contener letras y espacios');
+        return;
+    }
+
+    try {
+        const response = await fetch('http://localhost:4000/api/clientes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ nombre, edad, profesion }),
+        });
+
+        const data = await response.json();
+        console.log('Nuevo cliente agregado:', data);
+
+        // Limpiar los campos del formulario después de agregar el cliente
+        nombreInput.value = '';
+        edadInput.value = '';
+        profesionInput.value = '';
+
+        // O puedes usar reset() para restablecer todo el formulario
+        // document.getElementById('formularioClientes').reset();
+
+        // Llama a la función para actualizar la tabla después de agregar un cliente
+        obtenerClientes();
+    } catch (error) {
+        console.error('Error al agregar cliente:', error);
+    }
+}
